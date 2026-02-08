@@ -1,0 +1,2402 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="LAST STAND - Guilda competitiva Top 17 Brasil no Free Fire. Entre para nossa equipe de elite.">
+  <title>LAST STAND • Guilda Competitiva Free Fire</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  
+  <style>
+    /* RESET E VARIÁVEIS COM EFEITOS ESPECIAIS */
+    :root {
+      --primary: #9D4EDD;
+      --primary-dark: #7B2CBF;
+      --primary-light: #C77DFF;
+      --secondary: #FF00FF;
+      --secondary-dark: #D100D1;
+      --accent: #00F5FF;
+      --neon: #00F5FF;
+      --neon-pink: #FF00FF;
+      --background: #0A0A0F;
+      --surface: rgba(21, 21, 32, 0.85);
+      --surface-light: rgba(30, 30, 46, 0.7);
+      --surface-lighter: rgba(42, 42, 58, 0.5);
+      --text: #FFFFFF;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+      --text-tertiary: rgba(255, 255, 255, 0.7);
+      --border: rgba(157, 78, 221, 0.4);
+      --border-light: rgba(255, 255, 255, 0.15);
+      --glass: rgba(255, 255, 255, 0.08);
+      --success: #00D26A;
+      --warning: #FFB347;
+      --info: #4DABF7;
+      --radius: 20px;
+      --radius-lg: 28px;
+      --radius-xl: 36px;
+      --radius-round: 50%;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+      --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.7);
+      --shadow-neon: 0 0 25px rgba(157, 78, 221, 0.7),
+                     0 0 50px rgba(157, 78, 221, 0.4),
+                     0 0 75px rgba(157, 78, 221, 0.2);
+      --shadow-neon-pink: 0 0 25px rgba(255, 0, 255, 0.7),
+                          0 0 50px rgba(255, 0, 255, 0.4),
+                          0 0 75px rgba(255, 0, 255, 0.2);
+      --transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      --transition-slow: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary), var(--neon));
+      --gradient-primary-reverse: linear-gradient(135deg, var(--neon), var(--secondary), var(--primary));
+      --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--neon), var(--primary));
+      --gradient-text: linear-gradient(135deg, #fff, var(--primary-light), var(--secondary), var(--neon));
+      --gradient-dark: linear-gradient(135deg, #0A0A0F, #151520, #1E1E2E, #2A2A3A);
+      --gradient-purple: linear-gradient(135deg, #9D4EDD, #C77DFF, #FF00FF, #00F5FF);
+      --gradient-purple-dark: linear-gradient(135deg, #7B2CBF, #9D4EDD, #C77DFF);
+      --gradient-purple-light: linear-gradient(135deg, #C77DFF, #E0AAFF, #FF00FF);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 110px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(157, 78, 221, 0.15) 0%, transparent 25%),
+        radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.15) 0%, transparent 25%),
+        radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.08) 0%, transparent 35%),
+        linear-gradient(45deg, rgba(10, 10, 15, 0.9) 0%, rgba(21, 21, 32, 0.9) 100%);
+      min-height: 100vh;
+      opacity: 0;
+      animation: bodyFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes bodyFadeIn {
+      to { opacity: 1; }
+    }
+
+    /* ANIMAÇÃO DE PARTÍCULAS */
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: floatParticle 25s infinite linear;
+      filter: blur(1px);
+    }
+
+    .particle:nth-child(odd) {
+      background: var(--primary);
+      box-shadow: 0 0 20px var(--primary);
+    }
+
+    .particle:nth-child(even) {
+      background: var(--secondary);
+      box-shadow: 0 0 20px var(--secondary);
+    }
+
+    .particle:nth-child(3n) {
+      background: var(--neon);
+      box-shadow: 0 0 20px var(--neon);
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.4;
+      }
+      90% {
+        opacity: 0.4;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(720deg) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* LINHAS CONECTADAS */
+    .connecting-lines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      height: 1px;
+      opacity: 0.1;
+      animation: lineFlow 20s infinite linear;
+    }
+
+    @keyframes lineFlow {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100vw); }
+    }
+
+    /* LAYOUT E CONTAINERS */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      padding: 140px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* NAVEGAÇÃO */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(21, 21, 32, 0.85);
+      backdrop-filter: blur(25px) saturate(200%);
+      -webkit-backdrop-filter: blur(25px) saturate(200%);
+      border-bottom: 1px solid transparent;
+      padding: 20px 0;
+      transition: var(--transition-slow);
+      animation: navbarSlideDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes navbarSlideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .navbar.scrolled {
+      background: rgba(21, 21, 32, 0.95);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 15px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--text);
+      text-decoration: none;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      transition: var(--transition);
+      position: relative;
+      animation: logoGlow 3s infinite alternate;
+    }
+
+    @keyframes logoGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(157, 78, 221, 0.3));
+      }
+      50% {
+        filter: drop-shadow(0 0 25px rgba(157, 78, 221, 0.6));
+      }
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .logo:hover::after {
+      transform: scaleX(1);
+    }
+
+    .logo-img {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      border: 3px solid transparent;
+      background: var(--gradient-primary);
+      padding: 3px;
+      box-shadow: var(--shadow-neon);
+      transition: var(--transition);
+      animation: logoFloat 4s ease-in-out infinite;
+      object-fit: cover;
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    .logo:hover .logo-img {
+      transform: scale(1.2) rotate(15deg);
+      box-shadow: 0 0 40px rgba(157, 78, 221, 0.8);
+    }
+
+    /* MENU DESKTOP */
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      background: rgba(42, 42, 56, 0.7);
+      backdrop-filter: blur(15px);
+      padding: 10px;
+      border-radius: 24px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-links::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: var(--gradient-primary);
+      border-radius: 26px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .nav-links:hover::before {
+      opacity: 0.3;
+      animation: borderPulse 2s infinite;
+    }
+
+    @keyframes borderPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    .nav-link {
+      padding: 16px 32px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transition: left 0.8s;
+      z-index: -1;
+    }
+
+    .nav-link:hover::before {
+      left: 100%;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+      background: rgba(157, 78, 221, 0.15);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 32px rgba(157, 78, 221, 0.3);
+    }
+
+    .nav-link.active {
+      color: var(--text);
+      background: rgba(157, 78, 221, 0.2);
+      box-shadow: 0 8px 40px rgba(157, 78, 221, 0.4);
+      animation: activePulse 2s infinite;
+    }
+
+    @keyframes activePulse {
+      0%, 100% { box-shadow: 0 8px 40px rgba(157, 78, 221, 0.4); }
+      50% { box-shadow: 0 8px 60px rgba(157, 78, 221, 0.6); }
+    }
+
+    /* HERO SECTION */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(157, 78, 221, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 40% 80%, rgba(0, 245, 255, 0.15) 0%, transparent 35%);
+      z-index: -1;
+      animation: gradientFlow 12s ease-in-out infinite alternate;
+      filter: blur(40px);
+    }
+
+    @keyframes gradientFlow {
+      0% {
+        background-position: 0% 0%, 100% 100%, 50% 50%;
+        background-size: 200% 200%, 300% 300%, 400% 400%;
+      }
+      100% {
+        background-position: 100% 0%, 0% 100%, 50% 50%;
+        background-size: 300% 300%, 200% 200%, 400% 400%;
+      }
+    }
+
+    .hero-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 96px;
+      font-weight: 900;
+      margin-bottom: 40px;
+      background: var(--gradient-purple);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+      text-shadow: 0 10px 50px rgba(157, 78, 221, 0.4);
+      position: relative;
+      display: inline-block;
+      animation: titleFloat 6s ease-in-out infinite, titleShimmer 3s infinite;
+      opacity: 0;
+      transform: translateY(50px);
+      animation-fill-mode: forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0) rotateX(0); }
+      50% { transform: translateY(-20px) rotateX(5deg); }
+    }
+
+    @keyframes titleShimmer {
+      0%, 100% {
+        background-position: -200% center;
+      }
+      50% {
+        background-position: 200% center;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 24px;
+      color: var(--text-secondary);
+      margin-bottom: 60px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-light);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.8s;
+    }
+
+    /* BOTÕES - CORREÇÃO DO ALINHAMENTO */
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 100px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards 1s;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 22px 44px;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      backdrop-filter: blur(15px);
+      text-decoration: none;
+      color: white;
+    }
+
+    .btn-primary {
+      background: var(--gradient-purple);
+      color: white;
+      box-shadow: var(--shadow-neon);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-8px) scale(1.08);
+      box-shadow: 0 20px 60px rgba(157, 78, 221, 0.6),
+                  0 0 100px rgba(157, 78, 221, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(157, 78, 221, 0.1);
+      color: var(--text);
+      border: 2px solid rgba(157, 78, 221, 0.3);
+      backdrop-filter: blur(25px);
+      position: relative;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(157, 78, 221, 0.15);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
+
+    /* STATS - CORREÇÃO DO ALINHAMENTO */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 35px;
+      margin-top: 0;
+      perspective: 1000px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 50px 30px;
+      background: rgba(157, 78, 221, 0.1);
+      backdrop-filter: blur(25px) saturate(200%);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(157, 78, 221, 0.2);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(50px) rotateX(45deg);
+      animation: cardFlipIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      min-height: 220px;
+    }
+
+    .stat-card:nth-child(1) { animation-delay: 1.4s; }
+    .stat-card:nth-child(2) { animation-delay: 1.6s; }
+    .stat-card:nth-child(3) { animation-delay: 1.8s; }
+    .stat-card:nth-child(4) { animation-delay: 2s; }
+
+    @keyframes cardFlipIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+
+    .stat-card:hover {
+      transform: translateY(-15px) scale(1.08) rotateY(10deg);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-xl),
+                  inset 0 0 100px rgba(157, 78, 221, 0.1);
+      background: rgba(157, 78, 221, 0.15);
+    }
+
+    .stat-number {
+      font-size: 68px;
+      font-weight: 900;
+      background: var(--gradient-purple);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 16px;
+      line-height: 1;
+      text-shadow: 0 8px 30px rgba(157, 78, 221, 0.4);
+      display: inline-block;
+      animation: numberPulse 3s infinite;
+    }
+
+    @keyframes numberPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(157, 78, 221, 0.1);
+      border-radius: 20px;
+      border: 1px solid rgba(157, 78, 221, 0.2);
+    }
+
+    /* SECTION HEADERS */
+    .section-header {
+      text-align: center;
+      margin-bottom: 100px;
+      position: relative;
+      perspective: 1000px;
+    }
+
+    .section-title {
+      font-size: 68px;
+      font-weight: 900;
+      margin-bottom: 32px;
+      background: var(--gradient-purple);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      position: relative;
+      display: inline-block;
+      transform-style: preserve-3d;
+      animation: title3D 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes title3D {
+      0%, 100% { transform: rotateX(0deg) rotateY(0deg); }
+      25% { transform: rotateX(5deg) rotateY(10deg); }
+      50% { transform: rotateX(-5deg) rotateY(-10deg); }
+      75% { transform: rotateX(5deg) rotateY(-5deg); }
+    }
+
+    .section-subtitle {
+      font-size: 22px;
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: rgba(157, 78, 221, 0.05);
+      border: 1px solid rgba(157, 78, 221, 0.2);
+      transform: translateZ(50px);
+      animation: floatSubtitle 6s ease-in-out infinite;
+    }
+
+    @keyframes floatSubtitle {
+      0%, 100% { transform: translateZ(50px) translateY(0); }
+      50% { transform: translateZ(50px) translateY(-10px); }
+    }
+
+    /* CARDS */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 50px;
+      perspective: 1500px;
+    }
+
+    .card {
+      background: rgba(157, 78, 221, 0.1);
+      backdrop-filter: blur(25px) saturate(200%);
+      border-radius: var(--radius-xl);
+      padding: 60px 48px;
+      border: 1px solid rgba(157, 78, 221, 0.2);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(80px) rotateY(45deg);
+      animation: cardFloatIn 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes cardFloatIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateY(0);
+      }
+    }
+
+    .card:hover {
+      transform: translateY(-20px) scale(1.05) rotateX(5deg);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-xl),
+                  inset 0 0 150px rgba(157, 78, 221, 0.15);
+      animation: cardHoverFloat 3s ease-in-out infinite;
+      background: rgba(157, 78, 221, 0.15);
+    }
+
+    @keyframes cardHoverFloat {
+      0%, 100% { transform: translateY(-20px) scale(1.05) rotateX(5deg); }
+      50% { transform: translateY(-25px) scale(1.06) rotateX(7deg); }
+    }
+
+    .card-icon {
+      width: 100px;
+      height: 100px;
+      background: rgba(157, 78, 221, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 40px;
+      font-size: 48px;
+      color: var(--primary);
+      transition: var(--transition);
+      border: 2px solid rgba(157, 78, 221, 0.3);
+      position: relative;
+      overflow: hidden;
+      animation: iconFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-10px) rotate(5deg); }
+      66% { transform: translateY(5px) rotate(-5deg); }
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.2) rotate(15deg);
+      background: rgba(157, 78, 221, 0.25);
+      box-shadow: 0 0 50px rgba(157, 78, 221, 0.4);
+    }
+
+    .card-title {
+      font-size: 32px;
+      margin-bottom: 24px;
+      color: var(--text);
+      text-align: center;
+      font-weight: 800;
+      position: relative;
+      display: inline-block;
+    }
+
+    .card-text {
+      color: var(--text-secondary);
+      line-height: 1.9;
+      text-align: center;
+      font-size: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* TEAM SECTION */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      perspective: 2000px;
+    }
+
+    .team-card {
+      background: rgba(157, 78, 221, 0.1);
+      backdrop-filter: blur(25px) saturate(200%);
+      border-radius: var(--radius-xl);
+      padding: 60px 48px;
+      text-align: center;
+      border: 1px solid rgba(157, 78, 221, 0.2);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(100px) rotateX(60deg);
+      animation: teamRevolve 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .team-card:nth-child(1) { animation-delay: 0.2s; }
+    .team-card:nth-child(2) { animation-delay: 0.4s; }
+    .team-card:nth-child(3) { animation-delay: 0.6s; }
+    .team-card:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes teamRevolve {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+
+    .team-card:hover {
+      transform: translateY(-20px) scale(1.08) rotateY(10deg);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-xl);
+      background: rgba(157, 78, 221, 0.15);
+    }
+
+    .team-avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: var(--radius-round);
+      margin: 0 auto 40px;
+      background: var(--gradient-purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      color: white;
+      border: 6px solid rgba(157, 78, 221, 0.3);
+      box-shadow: 0 0 60px rgba(157, 78, 221, 0.5);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      animation: avatarFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes avatarFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-15px) rotate(3deg); }
+      66% { transform: translateY(10px) rotate(-3deg); }
+    }
+
+    .team-card:hover .team-avatar {
+      transform: scale(1.15) rotate(15deg);
+      box-shadow: 0 0 80px rgba(157, 78, 221, 0.7);
+    }
+
+    .team-name {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: var(--text);
+      position: relative;
+      display: inline-block;
+    }
+
+    .team-role {
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 24px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      position: relative;
+      display: inline-block;
+      padding: 10px 24px;
+      background: rgba(157, 78, 221, 0.15);
+      border-radius: 25px;
+      border: 2px solid rgba(157, 78, 221, 0.3);
+    }
+
+    .team-social {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .social-link {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-round);
+      background: rgba(157, 78, 221, 0.1);
+      backdrop-filter: blur(15px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+      border: 2px solid rgba(157, 78, 221, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-link:hover {
+      color: white;
+      transform: translateY(-10px) scale(1.15);
+      border-color: transparent;
+      box-shadow: 0 15px 40px rgba(157, 78, 221, 0.5);
+      background: var(--gradient-purple);
+    }
+
+    /* FAQ */
+    .faq-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      perspective: 1500px;
+    }
+
+    .faq-item {
+      background: rgba(157, 78, 221, 0.1);
+      backdrop-filter: blur(25px) saturate(200%);
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+      border: 1px solid rgba(157, 78, 221, 0.2);
+      overflow: hidden;
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateX(-100px) rotateY(45deg);
+      animation: faqSlideIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .faq-item:nth-child(1) { animation-delay: 0.2s; }
+    .faq-item:nth-child(2) { animation-delay: 0.4s; }
+    .faq-item:nth-child(3) { animation-delay: 0.6s; }
+    .faq-item:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes faqSlideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+      }
+    }
+
+    .faq-item.active {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+      transform: translateY(-5px);
+      background: rgba(157, 78, 221, 0.15);
+    }
+
+    .faq-question {
+      padding: 36px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--text);
+      transition: var(--transition);
+      background: rgba(157, 78, 221, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .faq-icon {
+      color: var(--primary);
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-size: 24px;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 36px;
+      max-height: 0;
+      overflow: hidden;
+      color: var(--text-secondary);
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      line-height: 1.9;
+      font-size: 18px;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 0 36px 36px;
+      max-height: 500px;
+    }
+
+    /* FORMULÁRIO */
+    .form-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(157, 78, 221, 0.1);
+      backdrop-filter: blur(40px) saturate(200%);
+      border-radius: var(--radius-xl);
+      padding: 80px;
+      border: 1px solid rgba(157, 78, 221, 0.2);
+      box-shadow: var(--shadow-xl),
+                  inset 0 0 200px rgba(157, 78, 221, 0.1);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.8) rotateX(45deg);
+      animation: formReveal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.5s;
+    }
+
+    @keyframes formReveal {
+      to {
+        opacity: 1;
+        transform: scale(1) rotateX(0);
+      }
+    }
+
+    .form-group {
+      margin-bottom: 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 16px;
+      font-weight: 700;
+      color: var(--text);
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 24px;
+      background: rgba(157, 78, 221, 0.05);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(157, 78, 221, 0.2);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(157, 78, 221, 0.08);
+      box-shadow: 0 0 0 4px rgba(157, 78, 221, 0.1),
+                  0 0 50px rgba(157, 78, 221, 0.2);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    textarea.form-control {
+      min-height: 180px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: rgba(157, 78, 221, 0.1);
+      backdrop-filter: blur(25px) saturate(200%);
+      padding: 120px 0 60px;
+      border-top: 1px solid rgba(157, 78, 221, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 80px;
+      margin-bottom: 80px;
+    }
+
+    .footer-logo {
+      font-size: 36px;
+      font-weight: 900;
+      margin-bottom: 32px;
+      background: var(--gradient-purple);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .footer-description {
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      line-height: 1.9;
+      font-size: 18px;
+      backdrop-filter: blur(10px);
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: rgba(157, 78, 221, 0.05);
+      border: 1px solid rgba(157, 78, 221, 0.2);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-weight: 600;
+      font-size: 17px;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    /* CRÉDITOS DEV */
+    .dev-credits {
+      background: rgba(157, 78, 221, 0.15);
+      backdrop-filter: blur(30px);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      margin: 80px auto 0;
+      max-width: 600px;
+      text-align: center;
+      border: 1px solid rgba(157, 78, 221, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 60px;
+      color: var(--text-secondary);
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu-btn {
+      display: none;
+      background: rgba(157, 78, 221, 0.15);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(157, 78, 221, 0.3);
+      color: var(--text);
+      font-size: 28px;
+      cursor: pointer;
+      padding: 16px;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      width: 64px;
+      height: 64px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 120px;
+      left: 0;
+      width: 100%;
+      background: rgba(157, 78, 221, 0.1);
+      backdrop-filter: blur(40px);
+      border-top: 1px solid rgba(157, 78, 221, 0.2);
+      padding: 0;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: var(--transition-slow);
+      z-index: 999;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .mobile-menu.active {
+      transform: translateY(0);
+      opacity: 1;
+      max-height: 600px;
+      padding: 32px;
+    }
+
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-nav-link {
+      padding: 28px;
+      border-radius: var(--radius);
+      background: rgba(157, 78, 221, 0.05);
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--transition);
+      border: 2px solid rgba(157, 78, 221, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 20px;
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+      background: rgba(157, 78, 221, 0.15);
+      color: var(--primary);
+      border-color: var(--primary);
+      transform: translateX(15px);
+      padding-left: 40px;
+      box-shadow: 0 10px 40px rgba(157, 78, 221, 0.3);
+    }
+
+    /* BACK TO TOP */
+    .back-to-top {
+      position: fixed;
+      bottom: 50px;
+      right: 50px;
+      width: 70px;
+      height: 70px;
+      background: var(--gradient-purple);
+      color: white;
+      border: none;
+      border-radius: var(--radius-round);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: var(--shadow-neon);
+      backdrop-filter: blur(15px);
+      transform: scale(0);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    .back-to-top:hover {
+      transform: scale(1.2) rotate(180deg);
+      box-shadow: 0 20px 60px rgba(157, 78, 221, 0.6),
+                  0 0 120px rgba(157, 78, 221, 0.3);
+    }
+
+    /* NOTIFICATION */
+    .notification {
+      position: fixed;
+      top: 140px;
+      right: 50px;
+      background: rgba(157, 78, 221, 0.1);
+      backdrop-filter: blur(30px);
+      color: var(--text);
+      padding: 28px 36px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(157, 78, 221, 0.2);
+      box-shadow: var(--shadow-xl);
+      z-index: 2000;
+      transform: translateX(calc(100% + 50px)) rotateY(90deg);
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      max-width: 450px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .notification.show {
+      transform: translateX(0) rotateY(0);
+    }
+
+    .notification.success {
+      border-left: 6px solid var(--success);
+    }
+
+    .notification.error {
+      border-left: 6px solid var(--primary);
+    }
+
+    .notification.info {
+      border-left: 6px solid var(--warning);
+    }
+
+    /* LOADING SCREEN */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 3000;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 100px;
+      height: 100px;
+      border: 4px solid transparent;
+      border-top-color: var(--primary);
+      border-right-color: var(--secondary);
+      border-bottom-color: var(--neon);
+      border-left-color: var(--neon-pink);
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
+      margin-bottom: 40px;
+      position: relative;
+      box-shadow: 0 0 50px rgba(157, 78, 221, 0.3);
+    }
+
+    .spinner::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      border: 4px solid transparent;
+      border-radius: 50%;
+      border-top-color: var(--neon-pink);
+      border-bottom-color: var(--primary);
+      animation: spin 3s linear infinite reverse;
+      filter: blur(10px);
+    }
+
+    .loading-text {
+      color: var(--text-secondary);
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-size: 16px;
+      animation: loadingText 3s infinite;
+      background: var(--gradient-purple);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @keyframes loadingText {
+      0%, 100% { letter-spacing: 4px; }
+      50% { letter-spacing: 6px; }
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 1200px) {
+      .hero-title {
+        font-size: 76px;
+      }
+      
+      .section-title {
+        font-size: 56px;
+      }
+      
+      .container {
+        padding: 0 40px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-title {
+        font-size: 64px;
+      }
+      
+      .section {
+        padding: 120px 0;
+      }
+      
+      .section-title {
+        font-size: 48px;
+      }
+      
+      .stats-grid,
+      .cards-grid,
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: flex;
+      }
+      
+      .form-container {
+        padding: 60px 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 48px;
+      }
+      
+      .hero-subtitle {
+        font-size: 20px;
+        padding: 24px;
+      }
+      
+      .section {
+        padding: 100px 0;
+      }
+      
+      .section-title {
+        font-size: 40px;
+      }
+      
+      .section-subtitle {
+        font-size: 20px;
+        padding: 24px;
+      }
+      
+      .stats-grid,
+      .cards-grid,
+      .team-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .form-container {
+        padding: 50px 30px;
+      }
+      
+      .stat-number {
+        font-size: 56px;
+      }
+      
+      .btn {
+        padding: 20px 36px;
+        font-size: 16px;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      
+      .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 0;
+      }
+      
+      .notification {
+        top: 120px;
+        right: 30px;
+        left: 30px;
+        max-width: none;
+      }
+      
+      .back-to-top {
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 40px;
+      }
+      
+      .hero-subtitle {
+        font-size: 18px;
+        padding: 20px;
+      }
+      
+      .section-title {
+        font-size: 36px;
+      }
+      
+      .btn {
+        padding: 18px 32px;
+        font-size: 15px;
+        width: 100%;
+        margin-bottom: 0;
+      }
+      
+      .container {
+        padding: 0 24px;
+      }
+      
+      .card,
+      .team-card {
+        padding: 50px 30px;
+      }
+      
+      .team-avatar {
+        width: 140px;
+        height: 140px;
+        font-size: 56px;
+      }
+      
+      .form-container {
+        padding: 40px 24px;
+      }
+      
+      .mobile-menu-btn {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+      }
+      
+      .stat-card {
+        padding: 40px 24px;
+        min-height: 200px;
+      }
+      
+      .stat-number {
+        font-size: 48px;
+      }
+    }
+
+    /* UTILITY CLASSES */
+    .mt-1 { margin-top: 10px; }
+    .mt-2 { margin-top: 20px; }
+    .mt-3 { margin-top: 30px; }
+    .mt-4 { margin-top: 40px; }
+    .mt-5 { margin-top: 50px; }
+    .mb-1 { margin-bottom: 10px; }
+    .mb-2 { margin-bottom: 20px; }
+    .mb-3 { margin-bottom: 30px; }
+    .mb-4 { margin-bottom: 40px; }
+    .mb-5 { margin-bottom: 50px; }
+    .ml-2 { margin-left: 20px; }
+    .ml-3 { margin-left: 30px; }
+  </style>
+</head>
+<body>
+  <!-- Particle Background -->
+  <div class="particles-container" id="particlesContainer"></div>
+  
+  <!-- Connecting Lines -->
+  <div class="connecting-lines" id="connectingLines"></div>
+
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">LAST STAND</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="logo">
+        <img src="https://cdn.discordapp.com/attachments/1462547977590669444/1469889376489177207/2026_02_04_22_26_56345058cd-76f2-4bb6-bffa-114beaf25832.jpg?ex=69894ca8&is=6987fb28&hm=9a01335741d0072c16bba027238d56f479f3b4094055870e2712d2d0cc45002a&" alt="LAST STAND Logo" class="logo-img">
+        <span>LAST STAND</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#hero" class="nav-link active">Início</a>
+        <a href="#sobre" class="nav-link">Sobre</a>
+        <a href="#equipe" class="nav-link">Equipe</a>
+        <a href="#ranks" class="nav-link">Divisões</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contato" class="nav-link">Contato</a>
+      </div>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-links">
+        <a href="#hero" class="mobile-nav-link active">
+          <i class="fas fa-home"></i> Início
+        </a>
+        <a href="#sobre" class="mobile-nav-link">
+          <i class="fas fa-info-circle"></i> Sobre
+        </a>
+        <a href="#equipe" class="mobile-nav-link">
+          <i class="fas fa-users"></i> Equipe
+        </a>
+        <a href="#ranks" class="mobile-nav-link">
+          <i class="fas fa-trophy"></i> Divisões
+        </a>
+        <a href="#faq" class="mobile-nav-link">
+          <i class="fas fa-question-circle"></i> FAQ
+        </a>
+        <a href="#contato" class="mobile-nav-link">
+          <i class="fas fa-envelope"></i> Contato
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">LAST STAND</h1>
+        <p class="hero-subtitle">
+          Guilda competitiva brasileira • Top 17 Brasil • 3 títulos conquistados<br>
+          Domine o campo de batalha com estratégias avançadas e treinamento profissional
+        </p>
+        
+        <!-- CORREÇÃO: Botões alinhados lado a lado -->
+        <div class="hero-buttons">
+          <button class="btn btn-primary" id="joinBtn">
+            <i class="fas fa-gamepad"></i> Entrar para a Elite
+          </button>
+          <a href="https://discord.gg/EA5XAfTx3" target="_blank" class="btn btn-secondary">
+            <i class="fab fa-discord"></i> Discord Oficial
+          </a>
+        </div>
+
+        <!-- CORREÇÃO: Stats alinhados corretamente -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Membros Ativos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Títulos Conquistados</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">Top 17</div>
+            <div class="stat-label">Ranking Brasil</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">68%</div>
+            <div class="stat-label">Taxa de Vitória</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section class="section" id="sobre">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Nossa Filosofia</h2>
+        <p class="section-subtitle">
+          Mais que uma guilda, uma instituição de desenvolvimento competitivo.<br>
+          Fundada em 2025 com foco em excelência e evolução constante.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <h3 class="card-title">Competição</h3>
+          <p class="card-text">Participamos dos principais torneios nacionais com times organizados, estratégias avançadas e preparação tática detalhada para cada campeonato.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="card-title">Comunidade</h3>
+          <p class="card-text">Discord organizado com salas de treino dedicadas, análise de gameplay profissional, eventos semanais e ambiente colaborativo para todos os membros.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3 class="card-title">Desenvolvimento</h3>
+          <p class="card-text">Programa de mentoria estruturado com jogadores experientes, workshops semanais e acompanhamento personalizado para evolução constante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipe -->
+  <section class="section" id="equipe">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Liderança</h2>
+        <p class="section-subtitle">A equipe que comanda a elite competitiva da Last Stand</p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">
+            <i class="fas fa-crown"></i>
+          </div>
+          <h3 class="team-name">ALLANIS & IZA</h3>
+          <div class="team-role">Fundadoras & Líderes</div>
+          <p class="card-text">Liderança estratégica e visão competitiva da guilda. Responsáveis pela direção geral e tomada de decisões importantes.</p>
+          <div class="team-social">
+            <a href="https://www.instagram.com/lastofc" class="social-link" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="team-name">NICOLY</h3>
+          <div class="team-role">Administradora</div>
+          <p class="card-text">Organização interna, moderação da comunidade e gestão das atividades diárias da guilda.</p>
+          <div class="team-social">
+            <a href="https://www.instagram.com/lastofc" class="social-link" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">
+            <i class="fas fa-users-cog"></i>
+          </div>
+          <h3 class="team-name">RAYANE & ELIEL</h3>
+          <div class="team-role">Administradores</div>
+          <p class="card-text">Suporte operacional, gestão da comunidade e organização de eventos internos.</p>
+          <div class="team-social">
+            <a href="https://www.instagram.com/lastofc" class="social-link" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <h3 class="team-name">TIME DE RECRUTAMENTO</h3>
+          <div class="team-role">Recrutadores</div>
+          <p class="card-text">LANY, IZA, RAYANE, ELIEL & NICOLY<br>Seleção e integração de novos talentos.</p>
+          <div class="team-social">
+            <a href="https://www.instagram.com/lastofc" class="social-link" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ranks -->
+  <section class="section" id="ranks">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Divisões Competitivas</h2>
+        <p class="section-subtitle">Estrutura organizada para todos os níveis de habilidade</p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card text-center">
+          <div class="card-icon" style="background: rgba(157, 78, 221, 0.2);">
+            <i class="fas fa-fire"></i>
+          </div>
+          <h3 class="card-title">Divisão Elite</h3>
+          <p class="card-text">Para jogadores experientes focados em competições de alto nível. Treinamentos avançados e participação em campeonatos profissionais.</p>
+          <div class="mt-4">
+            <span style="padding: 12px 28px; background: var(--gradient-purple-dark); color: white; border-radius: 30px; font-weight: 800; font-size: 15px; letter-spacing: 1.5px;">
+              MESTRE+
+            </span>
+          </div>
+        </div>
+
+        <div class="card text-center">
+          <div class="card-icon" style="background: rgba(157, 78, 221, 0.2);">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 class="card-title">Divisão Avançada</h3>
+          <p class="card-text">Para jogadores em desenvolvimento buscando evolução constante. Foco em fundamentos e trabalho em equipe preparatório para elite.</p>
+          <div class="mt-4">
+            <span style="padding: 12px 28px; background: var(--gradient-purple); color: white; border-radius: 30px; font-weight: 800; font-size: 15px; letter-spacing: 1.5px;">
+              ELITE
+            </span>
+          </div>
+        </div>
+
+        <div class="card text-center">
+          <div class="card-icon" style="background: rgba(157, 78, 221, 0.2);">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h3 class="card-title">Divisão Iniciante</h3>
+          <p class="card-text">Para novos talentos que desejam aprender fundamentos e crescer dentro da comunidade. Mentoria personalizada e ambiente acolhedor.</p>
+          <div class="mt-4">
+            <span style="padding: 12px 28px; background: var(--gradient-purple-light); color: white; border-radius: 30px; font-weight: 800; font-size: 15px; letter-spacing: 1.5px;">
+              DIAMANTE+
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Dúvidas Frequentes</h2>
+        <p class="section-subtitle">Tudo o que você precisa saber antes de se juntar a nós</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            Quanto tempo leva para ser aceito na guilda?
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            Analisamos todas as inscrições dentro de 24-48 horas. Após análise positiva, entramos em contato via Discord para uma breve entrevista e testes iniciais.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Existe alguma taxa para entrar ou permanecer na guilda?
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            Não, a Last Stand é completamente gratuita. Acreditamos que o talento não deve ser limitado por barreiras financeiras.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Qual a frequência mínima de treinos?
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            Esperamos que os membros participem de pelo menos 2 dos 3 treinos semanais (Segunda, Quarta e Sexta, 19h-21h). Comprometimento é essencial para o crescimento coletivo.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Qual a política de faltas?
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            Permitimos até 3 faltas mensais, desde que justificadas com antecedência. Faltas constantes podem resultar em rebaixamento de divisão ou exclusão.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulário -->
+  <section class="section" id="contato">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Candidate-se</h2>
+        <p class="section-subtitle">Preencha o formulário para iniciar seu processo seletivo</p>
+      </div>
+
+      <div class="form-container">
+        <form id="recruitForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nickname Free Fire *</label>
+              <input type="text" class="form-control" placeholder="Seu nickname no jogo" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ID Free Fire *</label>
+              <input type="text" class="form-control" placeholder="1234567890" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Discord *</label>
+              <input type="text" class="form-control" placeholder="usuario#0000" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Rank Atual *</label>
+              <select class="form-control" required>
+                <option value="">Selecione seu rank</option>
+                <option>Bronze</option>
+                <option>Prata</option>
+                <option>Ouro</option>
+                <option>Platina</option>
+                <option>Diamante</option>
+                <option>Mestre</option>
+                <option>Grão-Mestre</option>
+                <option>Desafiante</option>
+                <option>Lendário</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Horários Disponíveis *</label>
+            <input type="text" class="form-control" placeholder="Ex: Seg/Qua/Sex - 19h às 21h" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Por que você quer entrar na Last Stand? *</label>
+            <textarea class="form-control" placeholder="Conte sobre seus objetivos competitivos, experiências anteriores e como pretende contribuir para a guilda..." required rows="4"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 15px; color: var(--text); cursor: pointer; padding: 20px; background: rgba(157, 78, 221, 0.05); border-radius: var(--radius); border: 2px solid rgba(157, 78, 221, 0.2);">
+              <input type="checkbox" required style="width: 24px; height: 24px; accent-color: var(--primary);">
+              <span>Li e concordo com os termos e código de conduta da guilda</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 26px; font-size: 18px; font-weight: 800;">
+            <i class="fas fa-paper-plane"></i> Enviar Candidatura
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">LAST STAND</div>
+          <p class="footer-description">
+            Guilda competitiva brasileira de Free Fire, Top 17 nacional. Desenvolvemos jogadores de elite desde 2025 através de treinamento estruturado, competição de alto nível e comunidade colaborativa.
+          </p>
+          <div class="team-social">
+            <a href="https://discord.gg/EA5XAfTx3" class="social-link" target="_blank">
+              <i class="fab fa-discord"></i>
+            </a>
+            <a href="https://www.instagram.com/lastofc" class="social-link" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/553898769018" class="social-link" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="team-name mb-4">Navegação</h3>
+          <ul class="footer-links">
+            <li><a href="#hero"><i class="fas fa-chevron-right"></i> Início</a></li>
+            <li><a href="#sobre"><i class="fas fa-chevron-right"></i> Sobre</a></li>
+            <li><a href="#equipe"><i class="fas fa-chevron-right"></i> Equipe</a></li>
+            <li><a href="#ranks"><i class="fas fa-chevron-right"></i> Divisões</a></li>
+            <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="team-name mb-4">Recrutamento</h3>
+          <ul class="footer-links">
+            <li><a href="#contato"><i class="fas fa-chevron-right"></i> Candidate-se</a></li>
+            <li><a href="https://discord.gg/EA5XAfTx3" target="_blank"><i class="fas fa-chevron-right"></i> Discord</a></li>
+            <li><a href="mailto:recrutamento@laststandff.com"><i class="fas fa-envelope"></i> E-mail</a></li>
+            <li><a href="https://wa.me/553898769018" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Créditos Dev -->
+      <div class="dev-credits">
+        <p style="font-size: 16px; margin-bottom: 12px;">Desenvolvido com excelência por</p>
+        <h4 style="color: var(--text); margin-bottom: 16px; font-size: 24px;">yAshin Dev</h4>
+        <p style="font-size: 15px; color: var(--text-secondary); margin-bottom: 24px;">
+          Desenvolvimento Web • UI/UX Design • Soluções para Comunidades Gamers
+        </p>
+        <div class="team-social">
+          <a href="https://instagram.com/yashindev_" class="social-link" target="_blank" style="background: rgba(157, 78, 221, 0.2);">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-link" style="background: rgba(157, 78, 221, 0.2);">
+            <i class="fas fa-globe"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Last Stand Free Fire Guild. Todos os direitos reservados.</p>
+        <p class="mt-1" style="color: var(--text-tertiary); font-size: 15px;">Free Fire é uma marca registrada da Garena International.</p>
+        <p class="mt-2" style="color: var(--primary); font-weight: 800; letter-spacing: 4px; font-size: 18px;">#LastStandFF</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // DOM Content Loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Elementos principais
+      const loading = document.getElementById('loading');
+      const navbar = document.getElementById('navbar');
+      const backToTop = document.getElementById('backToTop');
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+      const recruitForm = document.getElementById('recruitForm');
+      const joinBtn = document.getElementById('joinBtn');
+      const faqItems = document.querySelectorAll('.faq-item');
+      const particlesContainer = document.getElementById('particlesContainer');
+      const connectingLines = document.getElementById('connectingLines');
+
+      // Criar partículas
+      function createParticles() {
+        const particleCount = 80;
+        
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('particle');
+          
+          const size = Math.random() * 8 + 3;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          particle.style.left = `${Math.random() * 100}%`;
+          particle.style.top = `${Math.random() * 100}%`;
+          particle.style.opacity = Math.random() * 0.6 + 0.2;
+          particle.style.animationDelay = `${Math.random() * 30}s`;
+          particle.style.animationDuration = `${Math.random() * 15 + 20}s`;
+          
+          particlesContainer.appendChild(particle);
+        }
+      }
+
+      // Criar linhas conectadas
+      function createConnectingLines() {
+        const lineCount = 15;
+        
+        for (let i = 0; i < lineCount; i++) {
+          const line = document.createElement('div');
+          line.classList.add('line');
+          
+          const top = Math.random() * 100;
+          const width = Math.random() * 300 + 100;
+          const delay = Math.random() * 20;
+          const duration = Math.random() * 10 + 15;
+          
+          line.style.top = `${top}%`;
+          line.style.width = `${width}px`;
+          line.style.animationDelay = `${delay}s`;
+          line.style.animationDuration = `${duration}s`;
+          line.style.opacity = Math.random() * 0.1 + 0.05;
+          
+          connectingLines.appendChild(line);
+        }
+      }
+
+      // Esconder loading
+      setTimeout(() => {
+        loading.classList.add('hidden');
+        setTimeout(() => {
+          loading.style.display = 'none';
+          createParticles();
+          createConnectingLines();
+        }, 800);
+      }, 2500);
+
+      // Scroll Handler
+      window.addEventListener('scroll', function() {
+        // Navbar
+        if (window.scrollY > 100) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+
+        // Back to top
+        if (window.scrollY > 500) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+
+        // Update active nav link
+        const sections = document.querySelectorAll('section[id]');
+        let current = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 150;
+          const sectionHeight = section.clientHeight;
+          
+          if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // Back to top
+      backToTop.addEventListener('click', function() {
+        this.style.transform = 'scale(1.3) rotate(360deg)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 500);
+        
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Mobile Menu
+      mobileMenuBtn.addEventListener('click', function() {
+        mobileMenu.classList.toggle('active');
+        const icon = this.querySelector('i');
+        if (mobileMenu.classList.contains('active')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+          document.body.style.overflow = 'hidden';
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close mobile menu on link click
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.remove('active');
+          mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+          mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+          document.body.style.overflow = '';
+        });
+      });
+
+      // FAQ Accordion
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+          const icon = question.querySelector('.faq-icon');
+          
+          // Close other items
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item && otherItem.classList.contains('active')) {
+              otherItem.classList.remove('active');
+            }
+          });
+          
+          // Toggle current item
+          item.classList.toggle('active');
+        });
+      });
+
+      // Form Submission
+      recruitForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const requiredFields = this.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+          if (!field.value.trim()) {
+            isValid = false;
+            field.style.borderColor = 'var(--primary)';
+            field.style.animation = 'inputShake 0.5s';
+            
+            const style = document.createElement('style');
+            style.textContent = `
+              @keyframes inputShake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-8px); }
+                75% { transform: translateX(8px); }
+              }
+            `;
+            document.head.appendChild(style);
+            
+            field.addEventListener('animationend', () => {
+              field.style.animation = '';
+            }, { once: true });
+          } else {
+            field.style.borderColor = '';
+            field.style.animation = '';
+          }
+        });
+        
+        if (!isValid) {
+          showNotification('Preencha todos os campos obrigatórios!', 'error');
+          return;
+        }
+        
+        // Simular envio
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        
+        setTimeout(() => {
+          submitBtn.innerHTML = '<i class="fas fa-check"></i> Candidatura Enviada!';
+          submitBtn.style.background = 'linear-gradient(135deg, var(--success), #00B894)';
+          submitBtn.style.boxShadow = '0 0 60px rgba(0, 210, 106, 0.6)';
+          
+          showNotification('🎉 Candidatura enviada com sucesso! Analisaremos em até 48h.', 'success');
+          
+          const formData = new FormData(this);
+          console.log('📨 Candidatura enviada:', Object.fromEntries(formData));
+          
+          // Confetti effect
+          createConfetti();
+          
+          setTimeout(() => {
+            this.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.background = '';
+            submitBtn.style.boxShadow = '';
+          }, 4000);
+        }, 3000);
+      });
+
+      // Confetti effect
+      function createConfetti() {
+        const confettiCount = 100;
+        const colors = ['#9D4EDD', '#C77DFF', '#FF00FF', '#00F5FF', '#E0AAFF'];
+        
+        for (let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement('div');
+          confetti.style.position = 'fixed';
+          confetti.style.width = '10px';
+          confetti.style.height = '10px';
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.borderRadius = '2px';
+          confetti.style.left = `${Math.random() * 100}vw`;
+          confetti.style.top = '-20px';
+          confetti.style.zIndex = '9999';
+          confetti.style.opacity = '0';
+          
+          document.body.appendChild(confetti);
+          
+          const animation = confetti.animate([
+            { 
+              opacity: 0,
+              transform: 'translateY(0)',
+              offset: 0
+            },
+            { 
+              opacity: 1,
+              transform: `translateY(${Math.random() * 100 + 50}vh) rotate(${Math.random() * 360}deg)`,
+              offset: 0.5
+            },
+            { 
+              opacity: 0,
+              transform: `translateY(100vh) rotate(${Math.random() * 720}deg)`,
+              offset: 1
+            }
+          ], {
+            duration: Math.random() * 3000 + 2000,
+            easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+          });
+          
+          animation.onfinish = () => confetti.remove();
+        }
+      }
+
+      // Join button
+      joinBtn.addEventListener('click', function() {
+        this.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 200);
+        
+        document.getElementById('contato').scrollIntoView({
+          behavior: 'smooth'
+        });
+        
+        // Fechar menu mobile se aberto
+        if (mobileMenu.classList.contains('active')) {
+          mobileMenu.classList.remove('active');
+          mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+          mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Smooth scroll para nav links
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            const offset = 120;
+            const targetPosition = targetElement.offsetTop - offset;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+          
+          // Fechar menu mobile
+          if (mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            document.body.style.overflow = '';
+          }
+        });
+      });
+
+      // Função de notificação
+      function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        
+        let icon = 'info-circle';
+        if (type === 'success') icon = 'check-circle';
+        if (type === 'error') icon = 'exclamation-circle';
+        
+        notification.innerHTML = `
+          <i class="fas fa-${icon}"></i>
+          <span style="flex: 1;">${message}</span>
+          <button class="notification-close" style="background: none; border: none; color: var(--text-tertiary); cursor: pointer; font-size: 20px; transition: var(--transition); padding: 8px; border-radius: 8px;">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.classList.add('show');
+        }, 10);
+        
+        // Botão fechar
+        const closeBtn = notification.querySelector('.notification-close');
+        closeBtn.addEventListener('click', () => {
+          notification.classList.remove('show');
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.parentNode.removeChild(notification);
+            }
+          }, 300);
+        });
+        
+        // Auto-remove após 6 segundos
+        setTimeout(() => {
+          if (notification.classList.contains('show')) {
+            notification.classList.remove('show');
+            setTimeout(() => {
+              if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+              }
+            }, 300);
+          }
+        }, 6000);
+      }
+
+      // Trigger initial scroll
+      setTimeout(() => {
+        window.dispatchEvent(new Event('scroll'));
+      }, 1000);
+    });
+
+    // Window Load
+    window.addEventListener('load', function() {
+      // Otimizar performance
+      document.body.style.willChange = 'transform, opacity';
+      
+      // Prefetch de links
+      const links = document.querySelectorAll('a[href^="https://"]');
+      links.forEach(link => {
+        link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', link.textContent);
+      });
+    });
+  </script>
+</body>
+</html>
